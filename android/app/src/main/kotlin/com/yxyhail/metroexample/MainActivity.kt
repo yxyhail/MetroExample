@@ -104,6 +104,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
 
     private fun configComponentName(goalClass: Class<*>) {
+        val text = if (goalClass == Common1Activity::class.java) {
+            intent_to_common1.text.toString()
+        } else {
+            intent_to_common2.text.toString()
+        }
+        index = text.substring(text.length - 1).toInt() - 1
+
         if (index == 4) index = 1 else index++
 
         JsLoaderUtil.jsState.componentName = "App$index"

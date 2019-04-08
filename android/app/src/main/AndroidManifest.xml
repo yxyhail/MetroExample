@@ -22,9 +22,9 @@
     <application
         android:name=".MainApplication"
         android:allowBackup="false"
-        android:icon="@drawable/ic_metro"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/ic_metro"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"

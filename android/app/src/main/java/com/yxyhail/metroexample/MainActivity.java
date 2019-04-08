@@ -39,7 +39,7 @@ import java.io.File;
 import java.util.Arrays;
 
 
-public  class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private int index = 0;
     private TextView common1;
     private TextView common2;
@@ -90,7 +90,6 @@ public  class MainActivity extends AppCompatActivity implements View.OnClickList
     }
 
 
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -125,6 +124,14 @@ public  class MainActivity extends AppCompatActivity implements View.OnClickList
 
 
     private void configComponentName(Class<?> goalClass) {
+        String text;
+        if (goalClass == Common1Activity.class) {
+            text = common1.getText().toString();
+        } else {
+            text = common2.getText().toString();
+        }
+        index = Integer.parseInt(text.substring(text.length() - 1)) - 1;
+
         if (index == 4) {
             index = 1;
         } else {

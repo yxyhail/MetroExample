@@ -251,6 +251,9 @@ Demo中另一种方式是，让子类直接继承`ReactActivity`,而在进入子
 `assets`目录下的`bundle.zip`压缩包为带有`File`文字的业务包，用来测试从本地File加载功能。而`assets`内其他的业务bundle文件，如[business1.android.bundle][business1.android.bundle]，是带有`Assets`文字的bundle包，用来测试从`assets`加载功能。JS代码中，如[Business1.js][Business1.js]，是带有`Runtime`文字的业务，用来测试开发过程中双击`R`键热更新功能。
 
 
+### 5.效果演示：
+<img src="./imgs//metro.gif" width="350" alt="Metro Example"/>
+<img src="./android/app/src/main/ic_launcher-web.png" width="80" alt="Metro Launcher"/> 
 
 ## License
 
@@ -262,7 +265,7 @@ Licensed under the [Apache License 2.0][License]
     you may not use this file except in compliance with the License.
     You may obtain a copy of the License at
 
-      http://www.apache.org/licenses/LICENSE-2.0
+        http://www.apache.org/licenses/LICENSE-2.0
 
     Unless required by applicable law or agreed to in writing, software
     distributed under the License is distributed on an "AS IS" BASIS,
@@ -307,4 +310,4 @@ Licensed under the [Apache License 2.0][License]
 [img-thirdlib]:./imgs/moduleid-thirdlib.png
 [img-bundle-name]:./imgs/bundle-name.png
 [img-bundle-name-encrypt]:./imgs/bundle-name-encrypt.png
-
+[img-launcher]:./android/app/src/main/ic_launcher-web.png
