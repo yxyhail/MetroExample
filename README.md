@@ -333,10 +333,10 @@ Demo中另一种方式是，让子类直接继承`ReactActivity`,而在进入子
 
 [ios_bridge]:https://github.com/chenzhe555/HHZRNRouteManager/blob/master/ios/subpackage_project_test/classes/HHZRNRouteManager/RCTBridge%2BHHZLoadOtherJS.h
 
-[ios_img1]:https://raw.githubusercontent.com/yxyhail/MetroExample/master/imgs/ios_img1.png
-[ios_img2]:https://raw.githubusercontent.com/yxyhail/MetroExample/master/imgs/ios_img2.png
-[ios_img3]:https://raw.githubusercontent.com/yxyhail/MetroExample/master/imgs/ios_img3.png
-[ios_img4]:https://raw.githubusercontent.com/yxyhail/MetroExample/master/imgs/ios_img4.png
+[ios_img1]:https://raw.githubusercontent.com/yxyhail/MetroExample/master/imgs/ios-img1.png
+[ios_img2]:https://raw.githubusercontent.com/yxyhail/MetroExample/master/imgs/ios-img2.png
+[ios_img3]:https://raw.githubusercontent.com/yxyhail/MetroExample/master/imgs/ios-img3.png
+[ios_img4]:https://raw.githubusercontent.com/yxyhail/MetroExample/master/imgs/ios-img4.png
 
 [img-app]:https://raw.githubusercontent.com/yxyhail/MetroExample/master/imgs/moduleid-app.png
 [img-core]:https://raw.githubusercontent.com/yxyhail/MetroExample/master/imgs/moduleid-core.png
