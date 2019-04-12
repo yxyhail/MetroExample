@@ -22,7 +22,7 @@ bundle代码拆分类型：基础包与业务包。
 
 配置Metro有三种方法，分别为`metro.config.js`、`metro.config.json`和`package.json`中添加`metro`字段，常用的方式为 `metro.config.js`。
 
-[Metro配置][metroConfig]内部结构大致像这样：
+内部结构大致像这样：
 
     module.exports = {
       resolver: {
@@ -43,10 +43,6 @@ bundle代码拆分类型：基础包与业务包。
 
 每个optoins内都有很多配置选项，而对于我们这些初学者来说，最重要的是`serializer`选项内的`createModuleIdFactory`与`processModuleFilter`。
 
-如图：
-
-<img src="./imgs/metro_config.png" width="450" alt="Metro Example"/>
-
 `createModuleIdFactory` :在[v0.24.1][customid]后,Metro支持了通过此方法配置自定义模块ID，同样支持字符串类型ID，用于生成`require`语句的模块ID，其类型为`() => (path: string) => number`(带有返回参数的返回函数的函数)，其中`path`为各个module的完整路径。此方法的另一个用途就是多次打包时，对于同一个模块生成相同的ID，下次更新发版时，不会因ID不同找不到Module。
 
 `processModuleFilter`:根据给出的条件，对Module进行过滤，将不需要的模块过滤掉。其类型为`(module: Array<Module>) => boolean`，其中`module`为输出的模块，里面带着相应的参数，根据返回的波尔值判断是否过滤当前模块。返回`false`为过滤，不打入bundle。
@@ -57,39 +53,40 @@ bundle代码拆分类型：基础包与业务包。
       //获取命令行执行的目录，__dirname是nodejs提供的变量
       const projectRootPath = __dirname;
       return (path) => {
+        console.log('');
+        console.log(path);
         let name = '';
-        // 如果需要去除react-native/Libraries路径去除可以放开下面代码
-        // if (path.indexOf('node_modules' + pathSep + 'react-native' + pathSep + 'Libraries' + pathSep) > 0) {
-        //   //这里是react native 自带的库，因其一般不会改变路径，所以可直接截取最后的文件名称
-        //   name = path.substr(path.lastIndexOf(pathSep) + 1);
-        // }
-        if (path.indexOf(projectRootPath) == 0) {
+        if (path.indexOf('node_modules' + pathSep + 'react-native' + pathSep + 'Libraries' + pathSep) > 0) {
+          //这里是react native 自带的库，因其一般不会改变路径，所以可直接截取最后的文件名称
+          name = path.substr(path.lastIndexOf(pathSep) + 1);
+          console.log('react libraries:' + name);
+        } else if (path.indexOf(projectRootPath) == 0) {
           /*
             这里是react native 自带库以外的其他库，因是绝对路径，带有设备信息，
             为了避免重复名称,可以保留node_modules直至结尾
             如/{User}/{username}/{userdir}/node_modules/xxx.js 需要将设备信息截掉
           */
           name = path.substr(projectRootPath.length + 1);
+          console.log('root libraries:' + name);
         }
         //js png字符串 文件的后缀名可以去掉
-        // name = name.replace('.js', '');
-        // name = name.replace('.png', '');
+        name = name.replace('.js', '');
+        name = name.replace('.png', '');
+        console.log('replace name:' + name);
         //最后在将斜杠替换为下划线
         let regExp = pathSep == '\\' ? new RegExp('\\\\', "gm") : new RegExp(pathSep, "gm");
         name = name.replace(regExp, '_');
-        //名称加密
-        if (isEncrypt) {
-          name = md5(name);
-        }
+        console.log('regExp name:' + name);
         return name;
       };
     }
 
-需要生成什么样的模块ID，可以根据自己的情况与喜好而定，无论是加密，拼接，甚至可以直接将获取到的`path`返回，唯一注意的是规则要统一，否则会无法找到相应的模块，当然模块ID定的越长，最终的bundle文件就越大，ID长短还是要适中，不过通过MD5加密后，长短已经无所谓了。
+需要生成什么样的模块ID，可以根据自己的情况与喜好而定，无论是加密，拼接，甚至可以直接将获取到的`path`返回，唯一注意的是规则要统一，否则会无法找到相应的模块，当然模块ID定的越长，最终的bundle文件就越大，ID长短还是要适中。
 
 在打业务包时，可以使用filter对基础包内已有模块进行过滤，减小bundle文件大小。
 
     function processModuleFilter(module) {
+      // console.log(module)
       //过滤掉path为__prelude__的一些模块（基础包内已有）
       if (module['path'].indexOf('__prelude__') >= 0) {
         return false;
@@ -105,6 +102,7 @@ bundle代码拆分类型：基础包与业务包。
         }
         return false;
       }
+      console.log(module.path)
       //其他就是应用代码
       return true;
     }
@@ -142,11 +140,7 @@ bundle代码拆分类型：基础包与业务包。
 
 将上述两种命令中的路径，替换为自己的路径，分了几个业务包就需要执行几次命令，可以将命令使用`&&`连接，写入到脚本文件内，如Linux的`.sh`或Windows的`.bat`文件，执行脚本文件即可。
 
-通过`react-native bundle -h`命令可以查看相应的参数配置选项，其中`--entry-file`为加载的入口文件，如图：
-
-![][bundle_help]
-
-接下来看下`createModuleIdFactory`的log输出结果:
+看下`createModuleIdFactory`的log输出结果:
 
 应用内的js:
 ![][img-app]
@@ -256,13 +250,10 @@ Demo中另一种方式是，让子类直接继承`ReactActivity`,而在进入子
 
 `assets`目录下的`bundle.zip`压缩包为带有`File`文字的业务包，用来测试从本地File加载功能。而`assets`内其他的业务bundle文件，如[business1.android.bundle][business1.android.bundle]，是带有`Assets`文字的bundle包，用来测试从`assets`加载功能。JS代码中，如[Business1.js][Business1.js]，是带有`Runtime`文字的业务，用来测试开发过程中双击`R`键热更新功能。
 
-### 5. 功能展望
 
-以上就是Demo中的全部内容了，对于下一步的功能展望就是，通过向工具类中传递不同的与服务器定好的模块Key，去下载不同的bundle内容，同样可以根据Key的不同，下载需要更新的图片资源，由工具类拷贝到指定的本地目录，供应用进行更新加载。
-
-### 6.效果演示：
+### 5.效果演示：
 <img src="./imgs//metro.gif" width="350" alt="Metro Example"/>
-<img src="https://raw.githubusercontent.com/yxyhail/MetroExample/master/android/app/src/main/ic_launcher-web.png" width="80" alt="Metro Launcher"/> 
+<img src="./android/app/src/main/ic_launcher-web.png" width="80" alt="Metro Launcher"/> 
 
 ## License
 
@@ -297,7 +288,6 @@ Licensed under the [Apache License 2.0][License]
 [multibundler]:https://github.com/smallnew/react-native-multibundler
 [customid]:https://github.com/facebook/metro/issues/6
 [License]:http://www.apache.org/licenses/LICENSE-2.0
-[metroConfig]:https://facebook.github.io/metro/docs/en/configuration
 
 [index.js]:./index.js
 [basics.js]:./src/basics/basics.js
@@ -320,4 +310,4 @@ Licensed under the [Apache License 2.0][License]
 [img-thirdlib]:./imgs/moduleid-thirdlib.png
 [img-bundle-name]:./imgs/bundle-name.png
 [img-bundle-name-encrypt]:./imgs/bundle-name-encrypt.png
-[bundle_help]:./imgs/bundle_help.png
+[img-launcher]:./android/app/src/main/ic_launcher-web.png
