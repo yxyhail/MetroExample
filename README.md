@@ -45,7 +45,8 @@ bundle代码拆分类型：基础包与业务包。
 
 如图：
 
-<img src="./imgs/metro_config.png" width="450" alt="Metro Example"/>
+<!-- <img src="./imgs/metro_config.png" width="450" alt="Metro Example"/> -->
+![][metro-config]
 
 `createModuleIdFactory` :在[v0.24.1][customid]后,Metro支持了通过此方法配置自定义模块ID，同样支持字符串类型ID，用于生成`require`语句的模块ID，其类型为`() => (path: string) => number`(带有返回参数的返回函数的函数)，其中`path`为各个module的完整路径。此方法的另一个用途就是多次打包时，对于同一个模块生成相同的ID，下次更新发版时，不会因ID不同找不到Module。
 
@@ -321,3 +322,4 @@ Licensed under the [Apache License 2.0][License]
 [img-bundle-name]:./imgs/bundle-name.png
 [img-bundle-name-encrypt]:./imgs/bundle-name-encrypt.png
 [bundle_help]:./imgs/bundle_help.png
+[metro-config]:./imgs/metro_config.png
