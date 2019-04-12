@@ -260,6 +260,36 @@ Demo中另一种方式是，让子类直接继承`ReactActivity`,而在进入子
 <img src="https://raw.githubusercontent.com/yxyhail/MetroExample/master/imgs//metro.gif" width="350" alt="Metro Example"/>
 <img src="https://raw.githubusercontent.com/yxyhail/MetroExample/master/android/app/src/main/ic_launcher-web.png" width="80" alt="Metro Launcher"/> 
 
+## 三.iOS 原生加载
+### 1.源码接入
+   相对于Android，iOS加载多个bundle文件较简单，只需要对RCTBridge扩展暴露以下接口即可：
+
+   [-(void)executeSourceCode:(NSData *)sourceCode sync:(BOOL)sync;][ios_bridge]
+   
+### 2.实践（以下是以一个基础包和一个业务包测试）
+   1.将打包好的基础包和业务包导入项目中
+
+    图1：
+
+    ![][ios_img1]
+
+   2.在App启动时加载基础包
+    图2：
+
+    ![][ios_img2] 
+
+   3.在详情页或者加载基础包之后预加载业务包
+
+    图3：
+
+     ![][ios_img3]
+
+   4.输出信息：先加载了基础包，后成功加载业务包，且页面&逻辑正常
+
+    图4：
+
+   ![][ios_img4]
+
 
 ## 四. 功能展望
 
@@ -300,6 +330,13 @@ Demo中另一种方式是，让子类直接继承`ReactActivity`,而在进入子
 [JsLoaderUtil]:https://github.com/yxyhail/MetroExample/tree/master/android/app/src/main/kotlin/com/yxyhail/metroexample/react/JsLoaderUtil.kt
 [MainApplication]:https://github.com/yxyhail/MetroExample/tree/master/android/app/src/main/kotlin/com/yxyhail/metroexample/MainApplication.kt
 [business1.android.bundle]:https://github.com/yxyhail/MetroExample/tree/master/android/app/src/main/assets/business1.android.bundle
+
+[ios_bridge]:https://github.com/chenzhe555/HHZRNRouteManager/blob/master/ios/subpackage_project_test/classes/HHZRNRouteManager/RCTBridge%2BHHZLoadOtherJS.h
+
+[ios_img1]:https://raw.githubusercontent.com/yxyhail/MetroExample/master/imgs/ios_img1.png
+[ios_img2]:https://raw.githubusercontent.com/yxyhail/MetroExample/master/imgs/ios_img2.png
+[ios_img3]:https://raw.githubusercontent.com/yxyhail/MetroExample/master/imgs/ios_img3.png
+[ios_img4]:https://raw.githubusercontent.com/yxyhail/MetroExample/master/imgs/ios_img4.png
 
 [img-app]:https://raw.githubusercontent.com/yxyhail/MetroExample/master/imgs/moduleid-app.png
 [img-core]:https://raw.githubusercontent.com/yxyhail/MetroExample/master/imgs/moduleid-core.png
