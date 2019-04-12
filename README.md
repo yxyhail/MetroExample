@@ -1,4 +1,4 @@
-# React Native Android端 使用Metro拆包及原生加载 学习研究
+# React Native 拆包及实践(iOS&Android)
 
 ## 一.拆包
 
