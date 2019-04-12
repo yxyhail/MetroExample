@@ -45,7 +45,6 @@ bundle代码拆分类型：基础包与业务包。
 
 如图：
 
-<!-- <img src="./imgs/metro_config.png" width="450" alt="Metro Example"/> -->
 ![][metro-config]
 
 `createModuleIdFactory` :在[v0.24.1][customid]后,Metro支持了通过此方法配置自定义模块ID，同样支持字符串类型ID，用于生成`require`语句的模块ID，其类型为`() => (path: string) => number`(带有返回参数的返回函数的函数)，其中`path`为各个module的完整路径。此方法的另一个用途就是多次打包时，对于同一个模块生成相同的ID，下次更新发版时，不会因ID不同找不到Module。
@@ -257,31 +256,17 @@ Demo中另一种方式是，让子类直接继承`ReactActivity`,而在进入子
 
 `assets`目录下的`bundle.zip`压缩包为带有`File`文字的业务包，用来测试从本地File加载功能。而`assets`内其他的业务bundle文件，如[business1.android.bundle][business1.android.bundle]，是带有`Assets`文字的bundle包，用来测试从`assets`加载功能。JS代码中，如[Business1.js][Business1.js]，是带有`Runtime`文字的业务，用来测试开发过程中双击`R`键热更新功能。
 
-### 5. 功能展望
+### 5.效果演示：
+<img src="https://raw.githubusercontent.com/yxyhail/MetroExample/master/imgs//metro.gif" width="350" alt="Metro Example"/>
+<img src="https://raw.githubusercontent.com/yxyhail/MetroExample/master/android/app/src/main/ic_launcher-web.png" width="80" alt="Metro Launcher"/> 
+
+
+## 四. 功能展望
 
 以上就是Demo中的全部内容了，对于下一步的功能展望就是，通过向工具类中传递不同的与服务器定好的模块Key，去下载不同的bundle内容，同样可以根据Key的不同，下载需要更新的图片资源，由工具类拷贝到指定的本地目录，供应用进行更新加载。
 
-### 6.效果演示：
-<img src="./imgs//metro.gif" width="350" alt="Metro Example"/>
-<img src="https://raw.githubusercontent.com/yxyhail/MetroExample/master/android/app/src/main/ic_launcher-web.png" width="80" alt="Metro Launcher"/> 
 
-## License
-
-Licensed under the [Apache License 2.0][License]
-
-    Copyright 2019 yxyhail
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-        http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
+## GitHub地址：[https://github.com/yxyhail/MetroExample][example]
 
 
 
@@ -300,26 +285,26 @@ Licensed under the [Apache License 2.0][License]
 [License]:http://www.apache.org/licenses/LICENSE-2.0
 [metroConfig]:https://facebook.github.io/metro/docs/en/configuration
 
-[index.js]:./index.js
-[basics.js]:./src/basics/basics.js
-[index1.js]:./src/index/index1.js
-[business.config.js]:./business.config.js
-[basics.config.js]:./basics.config.js
-[Business1.js]:./src/business/Business1.js
+[index.js]:https://github.com/yxyhail/MetroExample/tree/master/index.js
+[basics.js]:https://github.com/yxyhail/MetroExample/tree/master/src/basics/basics.js
+[index1.js]:https://github.com/yxyhail/MetroExample/tree/master/src/index/index1.js
+[business.config.js]:https://github.com/yxyhail/MetroExample/tree/master/business.config.js
+[basics.config.js]:https://github.com/yxyhail/MetroExample/tree/master/basics.config.js
+[Business1.js]:https://github.com/yxyhail/MetroExample/tree/master/src/business/Business1.js
 
-[build.gradle]:./android/app/build.gradle
-[Business1Activity]:./android/app/src/main/kotlin/com/yxyhail/metroexample/ui/Business1Activity.kt
-[Business2Activity]:./android/app/src/main/kotlin/com/yxyhail/metroexample/ui/Business2Activity.kt
-[Business3Activity]:./android/app/src/main/kotlin/com/yxyhail/metroexample/ui/Business3Activity.kt
-[Business4Activity]:./android/app/src/main/kotlin/com/yxyhail/metroexample/ui/Business4Activity.kt
-[JsLoaderUtil]:./android/app/src/main/kotlin/com/yxyhail/metroexample/react/JsLoaderUtil.kt
-[MainApplication]:./android/app/src/main/kotlin/com/yxyhail/metroexample/MainApplication.kt
-[business1.android.bundle]:./android/app/src/main/assets/business1.android.bundle
+[build.gradle]:https://github.com/yxyhail/MetroExample/tree/master/android/app/build.gradle
+[Business1Activity]:https://github.com/yxyhail/MetroExample/tree/master/android/app/src/main/kotlin/com/yxyhail/metroexample/ui/Business1Activity.kt
+[Business2Activity]:https://github.com/yxyhail/MetroExample/tree/master/android/app/src/main/kotlin/com/yxyhail/metroexample/ui/Business2Activity.kt
+[Business3Activity]:https://github.com/yxyhail/MetroExample/tree/master/android/app/src/main/kotlin/com/yxyhail/metroexample/ui/Business3Activity.kt
+[Business4Activity]:https://github.com/yxyhail/MetroExample/tree/master/android/app/src/main/kotlin/com/yxyhail/metroexample/ui/Business4Activity.kt
+[JsLoaderUtil]:https://github.com/yxyhail/MetroExample/tree/master/android/app/src/main/kotlin/com/yxyhail/metroexample/react/JsLoaderUtil.kt
+[MainApplication]:https://github.com/yxyhail/MetroExample/tree/master/android/app/src/main/kotlin/com/yxyhail/metroexample/MainApplication.kt
+[business1.android.bundle]:https://github.com/yxyhail/MetroExample/tree/master/android/app/src/main/assets/business1.android.bundle
 
-[img-app]:./imgs/moduleid-app.png
-[img-core]:./imgs/moduleid-core.png
-[img-thirdlib]:./imgs/moduleid-thirdlib.png
-[img-bundle-name]:./imgs/bundle-name.png
-[img-bundle-name-encrypt]:./imgs/bundle-name-encrypt.png
-[bundle_help]:./imgs/bundle_help.png
-[metro-config]:./imgs/metro_config.png
+[img-app]:https://raw.githubusercontent.com/yxyhail/MetroExample/master/imgs/moduleid-app.png
+[img-core]:https://raw.githubusercontent.com/yxyhail/MetroExample/master/imgs/moduleid-core.png
+[img-thirdlib]:https://raw.githubusercontent.com/yxyhail/MetroExample/master/imgs/moduleid-thirdlib.png
+[img-bundle-name]:https://raw.githubusercontent.com/yxyhail/MetroExample/master/imgs/bundle-name.png
+[img-bundle-name-encrypt]:https://raw.githubusercontent.com/yxyhail/MetroExample/master/imgs/bundle-name-encrypt.png
+[bundle_help]:https://raw.githubusercontent.com/yxyhail/MetroExample/master/imgs/bundle_help.png
+[metro-config]:https://raw.githubusercontent.com/yxyhail/MetroExample/master/imgs/metro_config.png
