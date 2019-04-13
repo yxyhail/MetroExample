@@ -2,7 +2,7 @@
 
 ## 一.拆包
 
-拆包的方式一般有三种，分别为Facebook的[Metro][metro]、携程的[moles-packer][moles]和diff patch（可以使用Google的[diff-match-patch][diff]）。但目前最好的方式可能还是[Metro][metro]。在调研的过程中，接触最早的，也是最全的的例子为[react-native-multibundler][multibundler]，这个例子甚至开发了可视化工具，进行拆包打包。
+拆包的方式一般有三种，分别为Facebook的[Metro][metro]、携程的[moles-packer][moles]和diff patch（可以使用Google的[diff-match-patch][diff]）。但目前最好的方式可能还是[Metro][metro]。在调研的过程中，接触最早的，也是最全的例子为[react-native-multibundler][multibundler]，这个例子甚至开发了可视化工具，进行拆包打包。
 
 bundle代码拆分类型：基础包与业务包。  
 基础包:将一些重复的js代码与第三方依赖库打成一个包。  
