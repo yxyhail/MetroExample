@@ -233,7 +233,7 @@ Demo中另一种方式是，让子类直接继承`ReactActivity`,而在进入子
 
 ### 3.Double Tap R
 
-到此我们的bundle文件已经加载好了，但不可能总是进行打包调试，平时开发时还是需要双击`R`进行热更新加载的。但JS代码都已经进行了业务拆分，并且Application中只对ReactNative返回了基础包的bundle，业务包分散在各个业务逻辑上。这时就需要一个开关来控制到底是加载文件bundle还是delta bundle，这大致分为三步或四步完成。
+到此我们的bundle文件已经加载好了，但不可能总是进行打包调试，平时开发时还是需要双击`R`进行热更新加载的。但JS代码都已经进行了业务拆分，并且Application中只对React Native返回了基础包的bundle，业务包分散在各个业务逻辑上。这时就需要一个开关来控制到底是加载文件bundle还是delta bundle，这大致分为三步或四步完成。
 
 第一步，在[index.js][index.js]文件内将拆分出来的业务包导入，相当于一次性将业务模块全部注册。
 
@@ -244,7 +244,7 @@ Demo中另一种方式是，让子类直接继承`ReactActivity`,而在进入子
 
 第二步，在`JsLoaderUtil`工具类内增加判断，如果是Dev模式，直接返回，不加载bundle并且不调用`createReactContextInBackground`。
 
-第三步，在[MainApplication][MainApplication]内`ReactNativeHost`的`getUseDeveloperSupport`方法内返回是否为Dev模式标志，并在`getJSMainModuleName`方法内返回之前的`index.js`名称，告诉React Native 此为入口文件。
+第三步，在[MainApplication][MainApplication]内`ReactNativeHost`的`getUseDeveloperSupport`方法内返回是否为Dev模式标志，并在`getJSMainModuleName`方法内返回之前的`index.js`名称，告诉React Native此为入口文件。
 
 这时就可以进入一个业务页面后，双击`R`更新页面内容了，但在切换开关时重启应用，会无法正常reload，就算进入页面，也会报错崩溃致使被杀掉进程，再进入应用就可以了。与其让它崩溃，不如要么将应用进程杀掉重启，要么增加第四步内容。
 
@@ -252,7 +252,7 @@ Demo中另一种方式是，让子类直接继承`ReactActivity`,而在进入子
 
 ### 4.特殊说明
 
-每一个js文件都相当于一个Module，而React Native对加载过的Module不会再次加载，也就是说，如果先加载assets内的的bundle再加载本地File的bundle文件，呈现的还会是assets内的bundle文件，除非杀掉进程重启后，先加载本地File的bundle文件，才会生效，并没找到很好的解决方法。如果你知道如何解决请在issue中告诉我。
+每一个js文件都相当于一个Module，而React Native对加载过的Module不会再次加载，也就是说，如果先加载assets内的bundle再加载本地File的bundle文件，呈现的还会是assets内的bundle文件，除非杀掉进程重启后，先加载本地File的bundle文件，才会生效，并没找到很好的解决方法。如果你知道如何解决请在issue中告诉我。
 
 `assets`目录下的`bundle.zip`压缩包为带有`File`文字的业务包，用来测试从本地File加载功能。而`assets`内其他的业务bundle文件，如[business1.android.bundle][business1.android.bundle]，是带有`Assets`文字的bundle包，用来测试从`assets`加载功能。JS代码中，如[Business1.js][Business1.js]，是带有`Runtime`文字的业务，用来测试开发过程中双击`R`键热更新功能。
 
