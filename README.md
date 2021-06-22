@@ -313,7 +313,7 @@ Demo中另一种方式是，让子类直接继承`ReactActivity`,而在进入子
 [multibundler]:https://github.com/smallnew/react-native-multibundler
 [customid]:https://github.com/facebook/metro/issues/6
 [License]:http://www.apache.org/licenses/LICENSE-2.0
-[metroConfig]:https://facebook.github.io/metro/docs/en/configuration
+[metroConfig]:https://facebook.github.io/metro/docs/configuration
 
 [index.js]:https://github.com/yxyhail/MetroExample/tree/master/index.js
 [basics.js]:https://github.com/yxyhail/MetroExample/tree/master/src/basics/basics.js
