@@ -1,3 +1,5 @@
+
+
 # React Native 拆包及实践(iOS&Android)
 
 ## 一.拆包
@@ -125,7 +127,7 @@ bundle代码拆分类型：基础包与业务包。
 根据基础包业务包的不同，添加 `--config <path/to/config>` 参数对相应入口文件打包。Metro官文虽然标明支持其他路径的配置文件，但至今没有成功过，只能在项目根目录添加配置文件，可能是我添加路径的方式不对，如果你知道如何添加其他路径config.js，请在issue中偷偷告诉我:sweat_smile:。
 
 基础包：  
-将需要的第三方依赖包与React Native的包、js文件等，可以通过`import`方式引入到一个js文件内，如[basics.js][basics.js]，再使用[basics.config.js][basics.config.js]当做参数传入到`--confg`后。
+将需要的第三方依赖包与React Native的包、js文件等，可以通过`import`方式引入到一个js文件内，如[basics.js][basics.js]，再使用[basics.config.js][basics.config.js]当做参数传入到`--config`后。
 
 
 使用终端切换到项目根目录，执行命令：
@@ -297,10 +299,6 @@ Demo中另一种方式是，让子类直接继承`ReactActivity`,而在进入子
 
 
 ## GitHub地址：[https://github.com/yxyhail/MetroExample][example]
-
-
-
-
 
 
 
